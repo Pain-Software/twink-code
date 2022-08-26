@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="dist/output.css">
 </head>
 
-<body class="bg-stone-900 text-white">
+<body class="bg-stone-900 text-white overflow-x-hidden">
     <main class="w-full h-screen grid place-items-center min-h-screen">
         <section class="space-y-5 w-1/2 text-center">
             <h1 class="text-8xl font-bold">Twink Code</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis eveniet eligendi saepe quo
-                necessitatibus assumenda aspernatur deleniti maxime non rem quibusdam maiores enim ad, recusandae neque,
-                laboriosam eos dicta? Voluptatum?</p>
+            <p>While bears live for hair and smurfs for humor, a twink lives for style. As such, style factors are the major way of recognizing a twink. 
+                This site helps you quickly decode other twink codes and <del>create your own</del><sup>(soon™)</sup>!
+            </p>
+
+            <p>This site is using modified <a target="_blank" href="https://user.xmission.com/~trevin/twink112.html" class="text-blue-600 hover:underline">Twink Code version 1.12</a>.</p>
 
             <input type="text" class="
                 bg-white
@@ -30,7 +32,7 @@
                 transition
                 ease-in-out
                 focus:text-gray-700 focus:bg-white focus:outline-none
-            " id="twinkcodeinput" placeholder="Insert Your Twink Code™" value="T5C7L3shl(--)++da-c--etk++sq" />
+            " id="twinkcodeinput" placeholder="Insert Your Twink Code™" />
 
             <span class="flex items-center justify-center w-full gap-4">
                 <button id="decode" type="button"
@@ -41,26 +43,52 @@
     </main>
 
 
-    <section id="results" class="grid grid-cols-2 items-center mx-16 gap-8">
+    <div id="tools" class="hidden text-sm flex space-x-2.5 w-full justify-end items-baseline text-stone-400 px-6 py-3">
+        <button id="screenshot">Screenshot</button>
+        <button id="viewToggle">Switch View</button>
+    </div>
+
+    <section id="results">
     </section>
+
+    <div class="fixed" style="left: 200%">
+        <section id="result_screenshot" class="bg-stone-900 relative w-screen pt-8" >
+            <span class="grid justify-center text-center gap-4">
+                <span>My Twink Code is</span>
+                <h1 id="result_code" class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">T5C7L3shl(--)++da-c--etk++sq</h1>
+            </span>
+    
+            <div id="result_content" class="mx-16 py-4"></div>
+    
+            <span id="result_footer" class="flex justify-between items-center mx-16 py-4 text-sm text-stone-400">
+                <code>Twink Code</code>
+                <time>26.8.2022 12:00</time>
+            </span>
+    
+        </section>
+    </div>
 
     <footer
         class="p-4 w-full shadow md:flex md:items-center md:justify-between md:p-6">
         
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+        <span class="text-sm text-stone-400">
             Made by <a href="https://reddit.com/u/bahamut731lp" class="text-blue-600 hover:underline">u/Bahamut731lp</a>
         </span>
         
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+        <ul class="flex flex-wrap items-center mt-3 text-sm text-stone-400 sm:mt-0">
             <li>
-                <a href="https://user.xmission.com/~trevin/twink112.html" class="mr-4 hover:underline md:mr-6">Original document</a>
+                <a href="changelog.html" class="mr-4 hover:underline md:mr-6">Changelog</a>
             </li>
             <li>
-                <a href="#" class="hover:underline">The Twink Code, version 1.0</a>
+                <a href="https://user.xmission.com/~trevin/twink112.html" class="mr-4 hover:underline md:mr-6">Original Twink Code Document</a>
+            </li>
+            <li>
+                <a href="/" class="hover:underline">The Twink Code, version 1.0</a>
             </li>
         </ul>
     </footer>
 
+    <script src="assets/dom-to-image.min.js"></script>
     <script src="src/data.js"></script>
     <script src="src/master.js"></script>
 </body>

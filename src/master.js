@@ -1,6 +1,11 @@
 const INPUT = document.getElementById("twinkcodeinput");
 const BUTTON = document.getElementById("decode");
 const RESULTS = document.getElementById("results");
+const VIEWTOGGLE = document.getElementById("viewToggle");
+const TOOLS = document.getElementById("tools");
+const SCREENSHOT_BTN = document.getElementById("screenshot");
+
+let COMPACT_VIEW = JSON.parse(localStorage.getItem("COMPACT_VIEW")) ?? false;
 
 const EnsureDefaultSymbols = (options) => options.map((option, index) => ({ ...option, symbol: option.symbol ?? index }));
 const CreateSymbolMap = (options) => options.reduce((previous, current) => ({ ...previous, [current.symbol]: current }), {});
@@ -56,31 +61,57 @@ const RenderSection = (
     data,
     colour = "from-pink-500 to-violet-500"
 ) => {
+
+    let className = "flex gap-8 p-2.5 w-full";
+    let textClassName = `text-8xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r ${colour} select-none`;
+    let codeClassName = "w-48 h-48 shrink-0 grid place-items-center";
+    let traitClassName = "text-sm font-light border-b border-solid border-white";
+    let labelClassName = "text-2xl font-bold tracking-tight"
+
+    if (COMPACT_VIEW) {
+        codeClassName = "w-16 h-16 shrink-0 grid place-items-center"
+        textClassName = `text-4xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r ${colour} select-none`;
+        traitClassName = "text-sm font-light border-b border-solid border-white";
+        labelClassName = "text-lg font-bold tracking-tight"
+    }
+
     return (`
         <section class="flex gap-8 p-2.5 w-full">
-            <div class="w-48 h-48 shrink-0 grid place-items-center">
-                <h1 class="text-8xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r ${colour} select-none">${code}</h1>
+            <div class="${codeClassName}">
+                <h1 class="${textClassName}">${code}</h1>
             </div>
             <div class="flex flex-col grow">
                 <section class="space-y-2.5">
-                    <h2 class="text-sm font-light border-b border-solid border-white">${trait}</h2>
-                    <h1 class="text-2xl font-bold tracking-tight">${data.label}</h1>
+                    <h2 class="${traitClassName}">${trait}</h2>
+                    <h1 class="${labelClassName}">${data.label}</h1>
                     
-                    <p>${data?.description ?? ""}</p>
+                    <p>${COMPACT_VIEW ? "" : (data?.description ?? "")}</p>
                 </section>
 
             </div>
         </section>
     `);
 }
-/*
-                <section class="font-mono grid grid-cols-2 mt-auto" role="table">
-                    <span>Code</span>
-                    <span>${code}</span>
 
-                    <span>Tries to imitate</span>
-                    <span>Euro Twink (T4)</span>
-                </section>
+const RenderContainer = (children) => {
+    let className = "grid grid-cols-2 items-center mx-16 gap-8";
+
+    if (COMPACT_VIEW) className = "grid grid-cols-4";
+
+    return (
+        `<section class="${className}">
+            ${children}
+        </section>`
+    )
+}
+/*
+    <section class="font-mono grid grid-cols-2 mt-auto" role="table">
+        <span>Code</span>
+        <span>${code}</span>
+
+        <span>Tries to imitate</span>
+        <span>Euro Twink (T4)</span>
+    </section>
 */
 
 const getTwinkType = (input) => {
@@ -169,83 +200,117 @@ const getFactors = (factors) => (input) => {
 
 const Render = () => {
     let code = INPUT.value;
-    
-    RESULTS.innerHTML = "";
-    RESULTS.insertAdjacentHTML("beforeend", [
-        getTwinkType(code),
-        getHairColour(code),
-        getHairLength(code),
-        getHairWaviness(code),
-        getFactors([
-            {
-                name: "Dizziness",
-                prefix: "d",
-                data: Dizziness,
-            },
-            {
-                name: "Attitude",
-                prefix: "a",
-                data: Attitude,
-            },
-            {
-                name: "The Whine Factor",
-                prefix: "w",
-                data: Whiningness,
-            },
-            {
-                name: "Color of Crust (Tan)",
-                prefix: "c",
-                data: Tan,
-            },
-            {
-                name: "Youthful Apperance",
-                prefix: "y",
-                data: AgeAppearance,
-            },
-            {
-                name: "Endowment (For the Size Queens Among Us)",
-                prefix: "e",
-                data: DickSize,
-            },
-            {
-                name: "Gonads (Balls)",
-                prefix: "g",
-                data: BallsSize,
-            },
-            {
-                name: "Flavour of cream",
-                prefix: "f",
-                data: Flavour,
-            },
-            {
-                name: "Kinky Factor",
-                prefix: "k",
-                data: Kinkiness,
-            },
-            {
-                name: "Slut Factor",
-                prefix: "s",
-                data: Sluttiness,
-            },
-            {
-                name: "Muscle Definition",
-                prefix: "m1",
-                data: MuscleDefinition,
-            },
-            {
-                name: "Muscle Mass",
-                prefix: "m2",
-                data: MuscleMass,
-            },
-            {
-                name: "The Q Factor",
-                prefix: "q",
-                data: QFactor
-            }
-        ])(code)
-    ].join(""));
 
-    RESULTS.scrollIntoView();
+    let rendered = RenderContainer(
+        [
+            getTwinkType(code),
+            getHairColour(code),
+            getHairLength(code),
+            getHairWaviness(code),
+            getFactors([
+                {
+                    name: "Dizziness",
+                    prefix: "d",
+                    data: Dizziness,
+                },
+                {
+                    name: "Attitude",
+                    prefix: "a",
+                    data: Attitude,
+                },
+                {
+                    name: "The Whine Factor",
+                    prefix: "w",
+                    data: Whiningness,
+                },
+                {
+                    name: "Color of Crust (Tan)",
+                    prefix: "c",
+                    data: Tan,
+                },
+                {
+                    name: "Youthful Apperance",
+                    prefix: "y",
+                    data: AgeAppearance,
+                },
+                {
+                    name: "Endowment (For the Size Queens Among Us)",
+                    prefix: "e",
+                    data: DickSize,
+                },
+                {
+                    name: "Gonads (Balls)",
+                    prefix: "g",
+                    data: BallsSize,
+                },
+                {
+                    name: "Flavour of cream",
+                    prefix: "f",
+                    data: Flavour,
+                },
+                {
+                    name: "Kinky Factor",
+                    prefix: "k",
+                    data: Kinkiness,
+                },
+                {
+                    name: "Slut Factor",
+                    prefix: "s",
+                    data: Sluttiness,
+                },
+                {
+                    name: "Muscle Definition",
+                    prefix: "m1",
+                    data: MuscleDefinition,
+                },
+                {
+                    name: "Muscle Mass",
+                    prefix: "m2",
+                    data: MuscleMass,
+                },
+                {
+                    name: "The Q Factor",
+                    prefix: "q",
+                    data: QFactor
+                }
+            ])(code)
+        ].join("")
+    );
+
+    RESULTS.innerHTML = "";
+    RESULTS.insertAdjacentHTML("beforeend", rendered);
+    
+    TOOLS.classList.remove("hidden");
+    TOOLS.scrollIntoView();
+}
+
+const SwitchView = () => {
+    COMPACT_VIEW = !COMPACT_VIEW;
+    localStorage.setItem("COMPACT_VIEW", COMPACT_VIEW);
+
+    Render();
+}
+
+const getScreenShot = () => {
+    let screenshotZone = document.getElementById("result_screenshot");
+    screenshotZone.querySelector("#result_content").innerHTML = RESULTS.innerHTML;
+    screenshotZone.querySelector("#result_footer").innerHTML = `<code>${window.location.host}</code><time>${new Date().toLocaleString()}</time>`;
+    screenshotZone.querySelector("#result_code").innerHTML = INPUT.value;
+
+    domtoimage.toPng(screenshotZone, {
+        style: {
+            display: "block",
+            left: 0
+        }
+    })
+    .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = `Twinkcode-${crypto.randomUUID()}.png`;
+        link.href = dataUrl;
+        link.click();
+    });
 }
 
 BUTTON.addEventListener("click", Render);
+VIEWTOGGLE.addEventListener("click", SwitchView);
+SCREENSHOT_BTN.addEventListener("click", getScreenShot);
