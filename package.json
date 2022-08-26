@@ -1,0 +1,15 @@
+{
+    "name": "twinkcode",
+    "version": "1.0.0",
+    "description": "",
+    "main": "master.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "tailwindcss": "^3.1.8"
+    }
+}
