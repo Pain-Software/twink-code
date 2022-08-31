@@ -2,9 +2,9 @@ const TwinkType = [
     { symbol: "1", label: "Beach Twink", description: "The beach twink is often a sun- bleached blonde, well tanned, and well defined. Sub-genres of beach twink are the VBall Twink and SurferTwink." },
     { symbol: "2", label: "Nuevo West Twink", description: "The old west was never quite like this. Colorful, sharp, and not nearly weathered enough, if cowboys were fashion slaves, they'd look like this." },
     { symbol: "3", label: "Rap Twink", description: "Marky Mark and the Funky Bunch have nothing on this twink. Urban fashion is raised to an art form by this delicious one." },
-    { symbol: "4", label: "The All-American, Twink", description: "Remember that quarterback you could never have in high school? This *is* him. Athletic, active, it's amazing how his hair stays in place." },
+    { symbol: "4", label: "The All-American Twink", description: "Remember that quarterback you could never have in high school? This *is* him. Athletic, active, it's amazing how his hair stays in place." },
     { symbol: "5", label: "Euro Twink", description: "Think of Armani suits. Think of Italian convertibles. The finest European designers would love to have him on the runway." },
-    { symbol: "6", label: "The Twink Next, Door", description: "The boy next door never looked this good (well, mine never did). A suburban sensibility becomes a showcase for a gorgeous young guy." },
+    { symbol: "6", label: "The Twink Next Door", description: "The boy next door never looked this good (well, mine never did). A suburban sensibility becomes a showcase for a gorgeous young guy." },
     { symbol: "7", label: "Radical Twink", description: "This twink marches to the beat of a different drummer. He may be wearing full renaissance garb (Felix, where are you?). He may be more subtle than that. But there's definitely something strange there..." },
     { symbol: "8", label: "Gym Twink", description: "The GymTwink may attempt any of the above styles (and pull them off successfully) but it's always that drop-dead-gorgeous bod that's overshadowing everything else. Even in sack cloth (we're talking *really* radical 7 here) he'd look incredible. GymTwinks should include what style they're attempting in their code (i.e. T8(5))" },
     { symbol: "9", label: "Appalachian Twink", description: "Jethro Bodine (of \"Beverly Hilbillies\" fame) was no Twink, but his style translates well. Overalls, with or without shoes and shirt (I like w/o shirt myself) are often characteristic." },
@@ -40,6 +40,14 @@ const HairWaviness = [
     { label: "Wavy", symbol: "w" },
     { label: "Curly", symbol: "c" }
 ];
+
+const Hairlessness = [
+    { label: "Smooth Body", symbol: "++"},
+    { label: "Little bit of Hair", symbol: "+"},
+    { label: "Neutral", symbol: ""},
+    { label: "Above Average Amount of Hair", symbol: "-"},
+    { label: "Veritable Furball", symbol: "--"}
+]
 
 const Dizziness = [
     { label: "Head in the clouds", symbol: "++", description: "Or at least somebody's shorts" },
@@ -156,4 +164,13 @@ const QFactor = [
     { label: "Unremarkable", symbol: null, description: "" },
     { label: "Straight-acting", symbol: "-", description: "" },
     { label: "Probably should BE straight", symbol: "--", description: "" } 
+]
+
+const TwinkHawk = [
+    { label: "Searches out Twinks when ever possible.", symbol: "++", description: "" },
+    { label: "Really likes twinkies", symbol: "+", description: "" },
+    { label: "Would like to meet a twinkie", symbol: "", description: "" },
+    { label: "Unremarkable", symbol: null, description: "" },
+    { label: "Doesn't care for twinkies", symbol: "-", description: "" },
+    { label: "Is offended by them (why are you even here?)", symbol: "--", description: "" } 
 ]
